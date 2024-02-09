@@ -10,5 +10,5 @@ public class SwitchingOperation
 
     public int? WagonType { get; set; }
 
-    public int? NumberOfWagons { get; set; }
+    public int NumberOfWagons { get; set; } = 1;
 }

@@ -1,17 +1,18 @@
 namespace TrainSwitching.Logic;
 
-public static class Constants
-{
-    public const int OPERATION_ADD = 1;
-    public const int OPERATION_TRAIN_LEAVE = 0;
-    public const int OPERATION_REMOVE = -1;
 
-    public const int WAGON_TYPE_PASSENGER = 0;
-    public const int WAGON_TYPE_LOCOMOTIVE = 1;
-    public const int WAGON_TYPE_FREIGHT = 2;
-    public const int WAGON_TYPE_CAR_TRANSPORT = 3;
-
-    public const int DIRECTION_EAST = 0;
-    public const int DIRECTION_WEST = 1;
-
-}
+    public enum Operations{
+        add = 1,
+         leave = 0,
+        remove = -1
+    }
+    public enum WagonTypes{
+        passenger = 0,
+        locomotive = 1,
+        freight = 2,
+        transport = 3
+    }
+    public enum Directions{
+        east = 0,
+        west = 1
+    }

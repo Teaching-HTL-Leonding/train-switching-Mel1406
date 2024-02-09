@@ -1,5 +1,4 @@
 using TrainSwitching.Logic;
-using static TrainSwitching.Logic.Constants;
 
 namespace TrainSwitching.Tests;
 
@@ -13,23 +12,23 @@ public class ChecksumTests
     }
 
     [Theory]
-    [InlineData(WAGON_TYPE_LOCOMOTIVE, 0)]
-    [InlineData(WAGON_TYPE_FREIGHT, 0)]
-    [InlineData(WAGON_TYPE_CAR_TRANSPORT, 0)]
-    [InlineData(WAGON_TYPE_PASSENGER, 0)]
-    [InlineData(WAGON_TYPE_LOCOMOTIVE, 5)]
-    [InlineData(WAGON_TYPE_FREIGHT, 5)]
-    [InlineData(WAGON_TYPE_CAR_TRANSPORT, 5)]
-    [InlineData(WAGON_TYPE_PASSENGER, 5)]
+    [InlineData((int)WagonTypes.locomotive, 0)]
+    [InlineData((int)WagonTypes.freight, 0)]
+    [InlineData((int)WagonTypes.transport, 0)]
+    [InlineData((int)WagonTypes.passenger, 0)]
+    [InlineData((int)WagonTypes.locomotive, 5)]
+    [InlineData((int)WagonTypes.freight, 5)]
+    [InlineData((int)WagonTypes.transport, 5)]
+    [InlineData((int)WagonTypes.passenger, 5)]
     public void CalculateChecksum_SingleWagon(int wagonType, int track)
     {
         var station = new TrainStation();
         station.Tracks[track].Wagons.Add(wagonType);
         var expected = wagonType switch
         {
-            WAGON_TYPE_LOCOMOTIVE => 10,
-            WAGON_TYPE_FREIGHT => 20,
-            WAGON_TYPE_CAR_TRANSPORT => 30,
+            (int)WagonTypes.locomotive => 10,
+            (int)WagonTypes.freight => 20,
+           (int)WagonTypes.transport => 30,
             _ => 1,
         };
         Assert.Equal(expected * (track + 1), station.CalculateChecksum());
@@ -39,9 +38,9 @@ public class ChecksumTests
     public void CalculateChecksum_MultipleWagonsOnMultipleTracks_ReturnsCorrectValue()
     {
         var station = new TrainStation();
-        station.Tracks[0].Wagons.Add(WAGON_TYPE_LOCOMOTIVE);
-        station.Tracks[1].Wagons.Add(WAGON_TYPE_FREIGHT);
-        station.Tracks[1].Wagons.Add(WAGON_TYPE_CAR_TRANSPORT);
+        station.Tracks[0].Wagons.Add((int)WagonTypes.locomotive);
+        station.Tracks[1].Wagons.Add((int)WagonTypes.freight);
+        station.Tracks[1].Wagons.Add((int)WagonTypes.transport);
         Assert.Equal(10 + 2 * (20 + 30), station.CalculateChecksum());
     }
 }
